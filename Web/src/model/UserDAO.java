@@ -8,6 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
+	   public int createUser(User user) {
+	        try {
+	        	System.out.println(user);
+	            Connection con = DBHelper.getConnection();
+	            String query = "INSERT INTO Users (user_id, ten, diachi, email, phone, username, password) VALUES (?,?,?,?,?,?,?)";
+	            PreparedStatement pstm = con.prepareStatement(query);
+	            pstm.setString(1, (user.getUser_id()));
+	            pstm.setString(2, user.getName());
+	            pstm.setString(3, user.getDiachi());
+	            pstm.setString(4, user.getEmail());
+	            pstm.setString(5, user.getPhone());
+	            pstm.setString(6, user.getUsername());
+	            pstm.setString(7, user.getPassword());
+	            int result = pstm.executeUpdate();
+	            return result;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return -1;
+	    }
+
 	public List<User> getALL(){
 		List<User> ls = new ArrayList<User>();
 		try {
@@ -20,7 +41,7 @@ public class UserDAO {
 				String ten = rs.getString("ten");
 				String diachi= rs.getString("diachi");
 				String email=rs.getString("email");
-				String 	phone=rs.getString("phone");
+				String phone=rs.getString("phone");
 				String username= rs.getString("username");
 				String password=rs.getNString("password");
 				ls.add(new User(user_id,ten,diachi,email,phone,username,password));
@@ -32,27 +53,7 @@ public class UserDAO {
 		}	
 		return ls;
 	}
-	public int createUser(User user) {
-		try {
-			Connection con = DBHelper.getConnection();
-			String query = "insert into Users (user_id,ten,diachi,email,phone,username,password) value (?,?,?,?,?,?,?)";
-			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(1,user.getUser_id());
-			pstm.setString(2,user.getName());
-			pstm.setString(3,user.getDiachi());
-			pstm.setString(4, user.getEmail());
-			pstm.setString(5, user.getPhone());
-			pstm.setString(6,user.getUsername());
-			pstm.setString(7, user.getPassword());
-			int kq = pstm.executeUpdate();
-			return kq;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
-		
-	}
+	
 	public User actionLogin(String username,String password) {
 		try {
 			Connection con = DBHelper.getConnection();
@@ -80,7 +81,19 @@ public class UserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
-		
+		return null;	
+	}
+	public int UpdateUser(User user) {
+		try {
+			Connection con = DBHelper.getConnection();
+			String query = "update User set ";
+			PreparedStatement pstm = con.prepareStatement(query);
+			int kq = pstm.executeUpdate();
+			return kq;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

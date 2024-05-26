@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,11 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List< User> ls = dao.getALL();
 		request.setAttribute("listUser",ls);
-		System.out.println(ls);
+		ServletContext servletContext = getServletContext();
+	     int majorVersion = servletContext.getMajorVersion();
+        int minorVersion = servletContext.getMinorVersion();
+	        
+	     System.out.println( majorVersion + "." + minorVersion);
 		RequestDispatcher rs = request.getRequestDispatcher("view/admin/admin.jsp");
 		rs.forward(request, response);
 				
