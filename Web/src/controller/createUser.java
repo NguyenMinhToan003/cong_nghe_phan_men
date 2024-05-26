@@ -47,7 +47,12 @@ public class createUser extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User user = new User(userId, name, diachi, email, phone, username, password);
-		dao.createUser(user);
+		int kq=dao.createUser(user);
+		if(kq!=-1) {
+			response.sendRedirect("./view/dangnhap/dangnhap.jsp");	
+		}
+		else System.out.println("Loi dang ki tai khoan ");
+		
 		
 	}
 

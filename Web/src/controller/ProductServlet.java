@@ -1,27 +1,30 @@
-package Servlet;
+package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
-import javax.servlet.ServletContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class TestServlet
- */
+import model.Product;
+import model.ProductDAO;
 
-@WebServlet("/check-servlet-version")
-public class TestServlet extends HttpServlet {
+/**
+ * Servlet implementation class ProductServlet
+ */
+@WebServlet("/ProductServlet")
+public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ProductDAO dao = new ProductDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public ProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +33,11 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 ServletContext servletContext = getServletContext();
-	     int majorVersion = servletContext.getMajorVersion();
-         int minorVersion = servletContext.getMinorVersion();
-	        
-	     System.out.println( majorVersion + "." + minorVersion);
+		List<Product> ls = dao.getAll();
+		request.setAttribute("product",ls);
+		System.out.println(ls);
+		RequestDispatcher rs= request.getRequestDispatcher("./view/sanpham/danhsachsanpham.jsp");
+		rs.forward(request, response);
 	}
 
 	/**
