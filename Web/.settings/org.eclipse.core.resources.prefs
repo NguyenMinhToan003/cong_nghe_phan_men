@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//WebContent/view/admin/kho.jsp=UTF-8
+encoding//WebContent/view/chitietsanpham/chitietsanpham.jsp=UTF-8
+encoding//src/controller/createUser.java=UTF-8
+encoding//src/model/UserDAO.java=UTF-8
