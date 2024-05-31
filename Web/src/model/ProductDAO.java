@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
+	
 	public List<Product> getAll(){
 		List<Product> ls = new ArrayList<Product>();
 		try {
@@ -37,7 +38,7 @@ public class ProductDAO {
 			Connection con = DBHelper.getConnection();
 			String query = "insert into sanpham (ma_san_pham, mota, dia_chi_hinh_anh, name, gia, ma_loai) values (?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(1, product.getMasp());
+			pstm.setString(1,  modifier.randomID(5));
 			pstm.setString(2,product.getMota() );
 			pstm.setString(3, product.getUrl_product());
 			pstm.setString(4, product.getName());
@@ -73,6 +74,37 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return product;
-		
+	}
+	public void deleteBook(String id) {
+		try {
+			Connection con = DBHelper.getConnection();
+			String query = "delete from sanpham where ma_san_pham  = ?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			pstm.setString(1,id);
+			int kq = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	public int editProduct(Product product ) {
+		try {
+			Connection con=DBHelper.getConnection();
+			String query = "update sanpham set mota=?,dia_chi_hinh_anh=?,name=?,gia=?,ma_loai=? where ma_san_pham=?";
+			PreparedStatement pstm = con.prepareStatement(query);
+			pstm.setString(1, product.getMota());
+			pstm.setString(2, product.getUrl_product());
+			pstm.setString(3,product.getName());
+			pstm.setFloat(4, product.getGia());
+			pstm.setString(5, product.getMaloai());
+			pstm.setString(6, product.getMasp());
+			int kq = pstm.executeUpdate();
+			return  kq;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

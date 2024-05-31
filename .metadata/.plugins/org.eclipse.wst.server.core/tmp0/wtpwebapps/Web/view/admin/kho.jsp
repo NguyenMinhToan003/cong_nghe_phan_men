@@ -37,7 +37,7 @@
                               <h4 class="card-title">Danh sach sach </h4>
                            </div>
                            <div class="iq-card-header-toolbar d-flex align-items-center">
-                              <a href="admin-add-book.html" class="btn btn-primary">Them sach</a>
+                              <a href="view/sanpham/themsanpham.jsp" class="btn btn-primary">Them sach</a>
                            </div>
                         </div>
                         <div class="iq-card-body">
@@ -61,7 +61,7 @@
                                     <tr>
                                         <td><%=product.getMasp() %></td>
                                         <td><img class="img-fluid rounded" src="<%=product.getUrl_product() %>" alt=""></td>
-                                        <td>Reading on the Worlds</td>
+                                        <td><%=product.getName() %></td>
                                         <td>General Books</td>
                                         <td>Jhone Steben</td>
                                         <td>
@@ -71,8 +71,8 @@
                                         <td><a href="/Web/style/book-pdf.html"><i class="ri-file-fill text-secondary font-size-18"></i></a></td>                                        
                                         <td>
                                            <div class="flex align-items-center list-user-action">
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-book.html"><i class="ri-pencil-line"></i></a>
-                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xoá" href="#"><i class="ri-delete-bin-line"></i></a>
+                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="editBook?id=<%=product.getMasp()%>"><i class="ri-pencil-line"></i></a>
+                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xoá" href="deleteBook?id=<%=product.getMasp()%>"><i class="ri-delete-bin-line"></i></a>
                                           </div>
                                         </td>
                                     </tr>     

@@ -14,7 +14,7 @@ public class UserDAO {
 	            Connection con = DBHelper.getConnection();
 	            String query = "INSERT INTO Users (user_id, ten, diachi, email, phone, username, password) VALUES (?,?,?,?,?,?,?)";
 	            PreparedStatement pstm = con.prepareStatement(query);
-	            pstm.setString(1, (user.getUser_id()));
+	            pstm.setString(1,  modifier.randomID(5));
 	            pstm.setString(2, user.getName());
 	            pstm.setString(3, user.getDiachi());
 	            pstm.setString(4, user.getEmail());

@@ -19,14 +19,12 @@ import model.ProductDAO;
 public class uploadProduct extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String UPLOAD_DIR = "uploads";
-   
 
     public uploadProduct() {
         super();
     }
 
     private static String getSubmittedFileName(Part part) {
-    	 ProductDAO dao = new ProductDAO();
         for (String cd : part.getHeader("content-disposition").split(";")) {
             if (cd.trim().startsWith("filename")) {
                 String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
@@ -44,34 +42,37 @@ public class uploadProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	 ProductDAO dao = new ProductDAO();
-    	String ma_san_pham = request.getParameter("ma_san_pham");
+        String ma_san_pham = request.getParameter("ma_san_pham");
         String mota = request.getParameter("mota");
         String name = request.getParameter("name");
         float gia = Float.parseFloat(request.getParameter("gia"));
         String ma_loai = request.getParameter("ma_loai");
         Part filePart = request.getPart("photo");
-        String fileName = getSubmittedFileName(filePart);       
+        String fileName = getSubmittedFileName(filePart);
 
-        
+        if (fileName == null || fileName.isEmpty()) {
+            response.getWriter().write("Invalid file.");
+            return;
+        }
+
         String uploadPath = request.getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        
+
         String filePath = uploadPath + File.separator + fileName;
-        System.out.println(filePath);
         
         try {
             filePart.write(filePath);
             String url_file = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
 
             Product product = new Product(ma_san_pham, mota, url_file, name, gia, ma_loai);
+            ProductDAO dao = new ProductDAO();
             int kq = dao.addProduct(product);
 
             if (kq > 0) {
-               response.sendRedirect("ProductServlet");
+                response.sendRedirect("ProductServlet");
             } else {
                 response.getWriter().write("Failed to add product to the database.");
             }

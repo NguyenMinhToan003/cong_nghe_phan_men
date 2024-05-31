@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="src=&quot;/Web/style/js/"/>
+		<item key="selection" value="Danh sach sach"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="Danh sach sach"/>
+			<item value="src=&quot;/Web/js"/>
 			<item value="src=&quot;/Web/js/"/>
 			<item value="src=&quot;/Web/images"/>
 			<item value="src=&quot;images/similar"/>
@@ -22,6 +24,7 @@
 			<item value="&lt;script src=&quot;js"/>
 		</list>
 		<list key="replacehistory">
+			<item value="src=&quot;/Web/style/js"/>
 			<item value="src=&quot;/Web/style/js/"/>
 			<item value="src=&quot;/Web/style/images"/>
 			<item value="src=&quot;/Web/images/similar"/>
